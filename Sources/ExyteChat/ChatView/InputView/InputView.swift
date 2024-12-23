@@ -208,8 +208,8 @@ struct InputView: View {
                 onAction(.cancelEdit)
             } label: {
                 Image(systemName: "xmark")
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
-                    .fontWeight(.bold)
                     .padding(5)
                     .background(Circle().foregroundStyle(.red))
             }
@@ -218,8 +218,8 @@ struct InputView: View {
                 onAction(.saveEdit)
             } label: {
                 Image(systemName: "checkmark")
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
-                    .fontWeight(.bold)
                     .padding(5)
                     .background(Circle().foregroundStyle(.green))
             }

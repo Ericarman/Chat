@@ -16,7 +16,7 @@ struct TextInputView: View {
     var availableInput: AvailableInputType
 
     var body: some View {
-        TextField("", text: $text, axis: .vertical)
+        textField
             .customFocus($globalFocusState.focus, equals: .uuid(inputFieldId))
             .placeholder(when: text.isEmpty) {
                 Text(style.placeholder)
@@ -28,5 +28,13 @@ struct TextInputView: View {
             .onTapGesture {
                 globalFocusState.focus = .uuid(inputFieldId)
             }
+    }
+    
+    private var textField: some View {
+        if #available(iOS 16.0, *) {
+            TextField("", text: $text, axis: .vertical)
+        } else {
+            TextField("", text: $text)
+        }
     }
 }

@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct AttachmentCell: View {
-
     @Environment(\.chatTheme) private var theme
 
     let attachment: Attachment
@@ -13,9 +12,10 @@ struct AttachmentCell: View {
 
     var body: some View {
         Group {
-            if attachment.type == .image {
+            switch attachment.type {
+            case .image:
                 content
-            } else if attachment.type == .video {
+            case .video:
                 content
                     .overlay {
                         theme.images.message.playVideo
@@ -23,17 +23,12 @@ struct AttachmentCell: View {
                             .foregroundColor(.white)
                             .frame(width: 36, height: 36)
                     }
-            } else {
-                content
-                    .overlay {
-                        Text("Unknown")
-                    }
             }
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
+        .contentShape(.rect)
+        .simultaneousGesture(TapGesture().onEnded({ _ in
             onTap(attachment)
-        }
+        }), including: .all)
     }
 
     var content: some View {

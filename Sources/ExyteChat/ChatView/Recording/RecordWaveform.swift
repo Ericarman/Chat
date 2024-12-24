@@ -37,9 +37,9 @@ struct RecordWaveformWithButtons: View {
             .foregroundColor(colorButton)
             .viewSize(40)
             .circleBackground(colorButtonBg)
-            .onTapGesture {
+            .simultaneousGesture(TapGesture().onEnded({ _ in
                 recordPlayer.togglePlay(recording)
-            }
+            }), including: .all)
             
             VStack(alignment: .leading, spacing: 5) {
                 RecordWaveformPlaying(samples: recording.waveformSamples, progress: recordPlayer.progress, color: colorWaveform, addExtraDots: false)

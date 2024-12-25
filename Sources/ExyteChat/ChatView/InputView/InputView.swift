@@ -68,6 +68,7 @@ public enum AvailableInputType {
     case textAndMedia
     case textAndAudio
     case textOnly
+    case none
 
     var isMediaAvailable: Bool {
         [.full, .textAndMedia].contains(self)
@@ -118,28 +119,32 @@ struct InputView: View {
     private let tapDelay = 0.2
 
     var body: some View {
-        VStack {
-            viewOnTop
-            HStack(alignment: .bottom, spacing: 10) {
-                HStack(alignment: .bottom, spacing: 0) {
-                    leftView
-                    middleView
-                    rightView
+        if availableInput == .none {
+            EmptyView()
+        } else {
+            VStack {
+                viewOnTop
+                HStack(alignment: .bottom, spacing: 10) {
+                    HStack(alignment: .bottom, spacing: 0) {
+                        leftView
+                        middleView
+                        rightView
+                    }
+                    .background {
+                        RoundedRectangle(cornerRadius: 18)
+                            .fill(fieldBackgroundColor)
+                    }
+                    
+                    rightOutsideButton
                 }
-                .background {
-                    RoundedRectangle(cornerRadius: 18)
-                        .fill(fieldBackgroundColor)
-                }
-
-                rightOutsideButton
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-        }
-        .background(backgroundColor)
-        .onAppear {
-            viewModel.recordingPlayer = recordingPlayer
-            viewModel.setRecorderSettings(recorderSettings: recorderSettings)
+            .background(backgroundColor)
+            .onAppear {
+                viewModel.recordingPlayer = recordingPlayer
+                viewModel.setRecorderSettings(recorderSettings: recorderSettings)
+            }
         }
     }
 

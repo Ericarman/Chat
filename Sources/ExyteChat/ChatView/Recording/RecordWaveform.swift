@@ -79,11 +79,8 @@ struct RecordWaveformPlaying: View {
             .frame(height: RecordWaveform.maxSampleHeight)
         }
         .frame(height: RecordWaveform.maxSampleHeight)
-        .applyIf(!addExtraDots) {
-            $0.frame(width: maxLength)
-        }
-        .frame(maxWidth: addExtraDots ? .infinity : maxLength)
-        .fixedSize(horizontal: !addExtraDots, vertical: true)
+        .frame(maxWidth: maxLength)
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     func adjustedSamples(_ width: CGFloat) -> [CGFloat] {

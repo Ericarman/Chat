@@ -257,7 +257,7 @@ struct InputView: View {
                 .overlay(alignment: .top) {
                     Group {
                         if state == .isRecordingTap {
-                            stopRecordButton
+//                            stopRecordButton
                         } else if state == .isRecordingHold {
                             lockRecordButton
                         }
@@ -392,19 +392,19 @@ struct InputView: View {
         .frameGetter($deleteRecordFrame)
     }
 
-    var stopRecordButton: some View {
-        Button {
-            onAction(.stopRecordAudio)
-        } label: {
-            theme.images.recordAudio.stopRecord
-                .viewSize(28)
-                .background(
-                    Capsule()
-                        .fill(Color.white)
-                        .shadow(color: .black.opacity(0.4), radius: 1)
-                )
-        }
-    }
+//    var stopRecordButton: some View {
+//        Button {
+//            onAction(.stopRecordAudio)
+//        } label: {
+//            theme.images.recordAudio.stopRecord
+//                .viewSize(28)
+//                .background(
+//                    Capsule()
+//                        .fill(Color.white)
+//                        .shadow(color: .black.opacity(0.4), radius: 1)
+//                )
+//        }
+//    }
 
     var lockRecordButton: some View {
         Button {
@@ -487,13 +487,13 @@ struct InputView: View {
         }
     }
 
-    var pauseRecordButton: some View {
-        Button {
-            onAction(.pauseRecord)
-        } label: {
-            theme.images.recordAudio.pauseRecord
-        }
-    }
+//    var pauseRecordButton: some View {
+//        Button {
+//            onAction(.pauseRecord)
+//        } label: {
+//            theme.images.recordAudio.pauseRecord
+//        }
+//    }
 
     @ViewBuilder
     var recordWaveform: some View {
@@ -502,8 +502,6 @@ struct InputView: View {
                 Group {
                     if state == .hasRecording || state == .pausedRecording {
                         playRecordButton
-                    } else if state == .playingRecording {
-                        pauseRecordButton
                     }
                 }
                 .frame(width: 20)
